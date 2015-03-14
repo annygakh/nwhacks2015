@@ -27,7 +27,7 @@ var current_snake;
 var EMPTY=0, SNAKE_P = 1, SNAKE_G =2, SNAKE_C = 3, SNAKE_R = 4;
 var NUM_FRUIT=6;
 
-var PAPER=10, GARBAGE=11, RECYCLE=12, COMPOST=13;
+var PAPER=10, GARBAGE=11, RECYCLE=12, COMPOST=13, array_fruit = [PAPER, GARBAGE, RECYCLE, COMPOST];
 
 var LEFT=0, UP=1, RIGHT=2, DOWN=3;
 //keycodes
@@ -92,12 +92,17 @@ function setFood(){
 	}
 	var random_index;
 	var randpos;
-	for (var n = 0; n < NUM_FRUIT-1; n++) {
+	for (var n = 0; n < NUM_FRUIT; n++) {
 		random_index = Math.floor(Math.random()*cells.length);
 		randpos = cells[random_index];
-		grid.set(Math.floor(Math.random()*(13 - 10 + 1)) + 10, randpos.x, randpos.y);
+		if (n < array_fruit.length){
+			grid.set(array_fruit[n], randpos.x, randpos.y);
+		}
+		else{
+			grid.set(Math.floor(Math.random()*(13 - 10 + 1)) + 10, randpos.x, randpos.y);
+		}
 	}
-
+	/*
 	random_index = Math.floor(Math.random()*cells.length);
 	randpos = cells[random_index];
 	switch (current_snake) {
@@ -114,10 +119,24 @@ function setFood(){
 			grid.set(RECYCLE, randpos.x, randpos.y);
 			break;
 	}
+	*/
 }
 // Game objects
 
 // functions
+
+function start_page(){
+
+
+	choose_mode();
+}
+
+function choose_mode(){
+
+
+	main();
+}
+
 function main(){
 	canvas = document.createElement("canvas");
 	canvas.width = COLS*20;
@@ -300,27 +319,22 @@ function draw(){
 				switch(grid.get(x,y)) {
 					case EMPTY:
 						ctx.fillStyle = "#fff";
-						console.log("empty");
 						break;
 					case SNAKE_P:
 					// brown
 						ctx.fillStyle  = "#deb887";
-						console.log("brown");
 						break;
 					case SNAKE_G:
 					// black
 						ctx.fillStyle = "#000";
-						console.log("black");
 						break;
 					case SNAKE_C:
 					// green
 						ctx.fillStyle = "#f0f";
-						console.log("green");
 						break;
 					case SNAKE_R:
 					// blue
 						ctx.fillStyle = "#00f";
-						console.log("blue");
 						break;
 					// case FRUIT:
 					// 	ctx.fillStyle  = "#f00";
