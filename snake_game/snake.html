@@ -25,7 +25,7 @@ var COLS=26, ROWS=26;
 var current_snake;
 
 var EMPTY=0, SNAKE_P = 1, SNAKE_G =2, SNAKE_C = 3, SNAKE_R = 4;
-var NUM_FRUIT=4;
+var NUM_FRUIT=6;
 
 var PAPER=10, GARBAGE=11, RECYCLE=12, COMPOST=13;
 
@@ -92,10 +92,27 @@ function setFood(){
 	}
 	var random_index;
 	var randpos;
-	for (var n = 0; n < NUM_FRUIT; n++) {
+	for (var n = 0; n < NUM_FRUIT-1; n++) {
 		random_index = Math.floor(Math.random()*cells.length);
 		randpos = cells[random_index];
 		grid.set(Math.floor(Math.random()*(13 - 10 + 1)) + 10, randpos.x, randpos.y);
+	}
+
+	random_index = Math.floor(Math.random()*cells.length);
+	randpos = cells[random_index];
+	switch (current_snake) {
+		case SNAKE_P:
+			grid.set(PAPER, randpos.x, randpos.y);
+			break;
+		case SNAKE_G:
+			grid.set(GARBAGE, randpos.x, randpos.y);
+			break;
+		case SNAKE_C:
+			grid.set(COMPOST, randpos.x, randpos.y);
+			break;
+		case SNAKE_R:
+			grid.set(RECYCLE, randpos.x, randpos.y);
+			break;
 	}
 }
 // Game objects
@@ -202,6 +219,32 @@ function update(){
 
 		// snakes eat all kinds of fruit for now
 		if (equals_to_food(nx, ny)) {
+			switch(current_snake){
+				case SNAKE_P:
+					if (grid.get(nx,ny) !== PAPER){
+						is_game_over = true;
+						return init();
+					}
+					break;
+				case SNAKE_R:
+					if (grid.get(nx,ny) !== RECYCLE){
+						is_game_over = true;
+						return init();
+					}
+					break;
+				case SNAKE_G:
+					if (grid.get(nx,ny) !== GARBAGE){
+						is_game_over = true;
+						return init();
+					}
+					break;
+				case SNAKE_C:
+					if (grid.get(nx,ny) !== COMPOST){
+						is_game_over = true;
+						return init();
+					}
+					break;
+			}
 			var tail = {x:nx, y:ny};
 			score++;
 			reset();
