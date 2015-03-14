@@ -22,8 +22,10 @@
 // constants
 var is_game_over;
 var COLS=26, ROWS=26;
+var current_snake;
 
-var EMPTY=0, SNAKE=1, FRUIT=2;
+var EMPTY=0, SNAKE_P = 1, SNAKE_G =2, SNAKE_C = 3, SNAKE_R = 4;
+var FRUIT=2;
 
 var LEFT=0, UP=1, RIGHT=2, DOWN=3;
 //keycodes
@@ -127,7 +129,23 @@ function init(){
 				y: Math.floor(Math.random()*ROWS)};
 				
 	snake.init(sp.dir, sp.x, sp.y);
-	grid.set(SNAKE, sp.x, sp.y);
+
+	current_snake = Math.ceil(Math.random() * 4);
+
+	switch(current_snake){
+		case SNAKE_P:
+			grid.set(SNAKE_P, sp.x, sp.y);
+			break;
+		case SNAKE_G:
+			grid.set(SNAKE_G, sp.x, sp.y);
+			break;
+		case SNAKE_C:
+			grid.set(SNAKE_C, sp.x, sp.y);
+			break;
+		case SNAKE_R:
+			grid.set(SNAKE_R, sp.x, sp.y);
+			break;
+	}
 
 	setFood();
 	// is_game_over = false;
@@ -148,7 +166,7 @@ function update(){
 	if (keystate[KEY_RIGHT] && snake.direction!== LEFT) snake.direction = RIGHT;
 	if (keystate[KEY_SPACE]) is_game_over = false;
 
-	if (frames%5 ===0) {
+	if (frames%2 ===0) {
 		var nx = snake.last.x;
 		var ny = snake.last.y;
 
@@ -169,7 +187,7 @@ function update(){
 
 		if (0 > nx || nx > grid.width -  1 ||
 			0 > ny || ny > grid.height - 1 || 
-			grid.get(nx, ny) === SNAKE) {
+			grid.get(nx, ny) === current_snake) {
 				is_game_over = true;
 				return init();
 		}
@@ -185,7 +203,20 @@ function update(){
 			tail.y = ny;
 		}
 
-			grid.set(SNAKE, tail.x, tail.y);
+		switch(current_snake){
+		case SNAKE_P:
+			grid.set(SNAKE_P, tail.x, tail.y);
+			break;
+		case SNAKE_G:
+			grid.set(SNAKE_G, tail.x, tail.y);
+			break;
+		case SNAKE_C:
+			grid.set(SNAKE_C, tail.x, tail.y);
+			break;
+		case SNAKE_R:
+			grid.set(SNAKE_R, tail.x, tail.y);
+			break;
+	}
 
 
 		snake.insert(tail.x, tail.y);
@@ -200,12 +231,31 @@ function draw(){
 				switch(grid.get(x,y)) {
 					case EMPTY:
 						ctx.fillStyle = "#fff";
+						console.log("empty");
 						break;
-					case SNAKE:
-						ctx.fillStyle  = "#0ff";
+					case SNAKE_P:
+					// brown
+						ctx.fillStyle  = "#deb887";
+						console.log("brown");
+						break;
+					case SNAKE_G:
+					// black
+						ctx.fillStyle = "#000";
+						console.log("black");
+						break;
+					case SNAKE_C:
+					// green
+						ctx.fillStyle = "#f0f";
+						console.log("green");
+						break;
+					case SNAKE_R:
+					// blue
+						ctx.fillStyle = "#00f";
+						console.log("blue");
 						break;
 					case FRUIT:
 						ctx.fillStyle  = "#f00";
+						console.log("red");
 						break;
 				}
 				ctx.fillRect(x*tw, y*th, tw, th);
