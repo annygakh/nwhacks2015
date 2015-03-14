@@ -90,12 +90,14 @@ function setFood(){
 	var randpos = cells[random_index];
 	grid.set(Math.floor(Math.random()*(13 - 10 + 1)) + 10, randpos.x, randpos.y);
 
-	// random_index = Math.floor(Math.random()*empty.length);
-	// randpos = empty[random_index];
-	// grid.set(FRUIT, randpos.x, randpos.y);
+	if (eaten) {
+		random_index = Math.floor(Math.random()*cells.length);
+		randpos = cells[random_index];
+		grid.set(Math.floor(Math.random()*(13 - 10 + 1)) + 10, randpos.x, randpos.y);
+	}
 }
 // Game objects
-var canvas, ctx, keystate, frames, score, is_game_over = false;
+var canvas, ctx, keystate, frames, score, is_game_over = false, eaten = false;
 
 // functions
 function main(){
@@ -181,13 +183,16 @@ function update(){
 				return init();
 		}
 
+		// snakes eat all kinds of fruit for now
 		if (grid.get(nx, ny) === PAPER || grid.get(nx, ny) === GARBAGE || grid.get(nx, ny) === COMPOST || grid.get(nx, ny) === RECYCLE) {
 			var tail = {x:nx, y:ny};
 			score++;
+			eaten = true;
 			setFood();
 		} else {
 			var tail = snake.remove();
 			grid.set(EMPTY, tail.x, tail.y);
+			eaten = false;
 			tail.x = nx;
 			tail.y = ny;
 		}
