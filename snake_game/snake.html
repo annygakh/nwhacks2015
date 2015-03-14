@@ -27,7 +27,7 @@ var EMPTY=0, SNAKE=1, FRUIT=2;
 
 var LEFT=0, UP=1, RIGHT=2, DOWN=3;
 //keycodes
-var KEY_LEFT=37, KEY_UP=38, KEY_RIGHT=39, KEY_DOWN = 40;
+var KEY_LEFT=37, KEY_UP=38, KEY_RIGHT=39, KEY_DOWN = 40, KEY_SPACE=32;
 
 
 var grid = {
@@ -146,6 +146,7 @@ function update(){
 	if (keystate[KEY_UP] && snake.direction!==  DOWN) snake.direction = UP;
 	if (keystate[KEY_DOWN] && snake.direction!== UP ) snake.direction = DOWN;
 	if (keystate[KEY_RIGHT] && snake.direction!== LEFT) snake.direction = RIGHT;
+	if (keystate[KEY_SPACE]) is_game_over = false;
 
 	if (frames%5 ===0) {
 		var nx = snake.last.x;
@@ -217,10 +218,10 @@ function draw(){
 		ctx.font = "20px Times";
 		ctx.fillStyle = "#000";
 		var game_over_string = "GAME OVER";
-		ctx.fillText(game_over_string, canvas.width / 2 - game_over_string.length*7, canvas.height /2 );
+		var repeat = ", press spacebar to try again";
+		ctx.fillText(game_over_string + repeat, canvas.width / 2 - game_over_string.length*18, canvas.height /2 );
 	}
 }
-5
 main();
 	</script>
 
