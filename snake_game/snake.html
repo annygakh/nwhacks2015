@@ -125,6 +125,10 @@ function init(){
 	var sp = {dir: Math.floor(Math.random()*4),
 				x: Math.floor(Math.random()*COLS), 
 				y: Math.floor(Math.random()*ROWS)};
+
+	if(sp.x <= 4 || sp.x >= 22 || sp.y <= 4 || sp.y >= 22) {
+		sp.x = sp.y = 10;
+	}
 				
 	snake.init(sp.dir, sp.x, sp.y);
 	grid.set(SNAKE, sp.x, sp.y);
@@ -223,8 +227,6 @@ function draw(){
 	}
 }
 main();
-
-//Peter 
 	</script>
 
 </body>
