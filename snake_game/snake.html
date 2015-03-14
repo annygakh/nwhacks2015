@@ -181,7 +181,7 @@ function update(){
 				return init();
 		}
 
-		if (grid.get(nx, ny) === FRUIT){
+		if (grid.get(nx, ny) === PAPER || grid.get(nx, ny) === GARBAGE || grid.get(nx, ny) === COMPOST || grid.get(nx, ny) === RECYCLE) {
 			var tail = {x:nx, y:ny};
 			score++;
 			setFood();
@@ -192,9 +192,7 @@ function update(){
 			tail.y = ny;
 		}
 
-			grid.set(SNAKE, tail.x, tail.y);
-
-
+		grid.set(SNAKE, tail.x, tail.y);
 		snake.insert(tail.x, tail.y);
 	}
 }
