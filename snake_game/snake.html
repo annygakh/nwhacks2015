@@ -25,7 +25,7 @@ var COLS=26, ROWS=26;
 var current_snake;
 
 var EMPTY=0, SNAKE_P = 1, SNAKE_G =2, SNAKE_C = 3, SNAKE_R = 4;
-var FRUIT=2;
+var NUM_FRUIT=4;
 
 var PAPER=10, GARBAGE=11, RECYCLE=12, COMPOST=13;
 
@@ -33,6 +33,8 @@ var LEFT=0, UP=1, RIGHT=2, DOWN=3;
 //keycodes
 var KEY_LEFT=37, KEY_UP=38, KEY_RIGHT=39, KEY_DOWN = 40, KEY_SPACE=32;
 
+
+var canvas, ctx, keystate, frames, score, is_game_over = false, eaten = false;
 
 var grid = {
 	width: null,
@@ -88,18 +90,15 @@ function setFood(){
 			}
 		}
 	}
-	var random_index = Math.floor(Math.random()*cells.length);
-	var randpos = cells[random_index];
-	grid.set(Math.floor(Math.random()*(13 - 10 + 1)) + 10, randpos.x, randpos.y);
-
-	if (eaten) {
+	var random_index;
+	var randpos;
+	for (var n = 0; n < NUM_FRUIT; n++) {
 		random_index = Math.floor(Math.random()*cells.length);
 		randpos = cells[random_index];
 		grid.set(Math.floor(Math.random()*(13 - 10 + 1)) + 10, randpos.x, randpos.y);
 	}
 }
 // Game objects
-var canvas, ctx, keystate, frames, score, is_game_over = false, eaten = false;
 
 // functions
 function main(){
@@ -202,10 +201,10 @@ function update(){
 		}
 
 		// snakes eat all kinds of fruit for now
-		if (grid.get(nx, ny) === PAPER || grid.get(nx, ny) === GARBAGE || grid.get(nx, ny) === COMPOST || grid.get(nx, ny) === RECYCLE) {
+		if (equals_to_food(nx, ny)) {
 			var tail = {x:nx, y:ny};
 			score++;
-			eaten = true;
+			reset();
 			setFood();
 		} else {
 			var tail = snake.remove();
@@ -215,27 +214,38 @@ function update(){
 			tail.y = ny;
 		}
 
-// <<<<<<< HEAD
 		switch(current_snake){
-		case SNAKE_P:
-			grid.set(SNAKE_P, tail.x, tail.y);
-			break;
-		case SNAKE_G:
-			grid.set(SNAKE_G, tail.x, tail.y);
-			break;
-		case SNAKE_C:
-			grid.set(SNAKE_C, tail.x, tail.y);
-			break;
-		case SNAKE_R:
-			grid.set(SNAKE_R, tail.x, tail.y);
-			break;
+			case SNAKE_P:
+				grid.set(SNAKE_P, tail.x, tail.y);
+				break;
+			case SNAKE_G:
+				grid.set(SNAKE_G, tail.x, tail.y);
+				break;
+			case SNAKE_C:
+				grid.set(SNAKE_C, tail.x, tail.y);
+				break;
+			case SNAKE_R:
+				grid.set(SNAKE_R, tail.x, tail.y);
+				break;
 	}
 
 
-// =======
-		grid.set(SNAKE, tail.x, tail.y);
-// >>>>>>> master
+
 		snake.insert(tail.x, tail.y);
+	}
+}
+
+function equals_to_food(x,y){
+	return (grid.get(x, y) === PAPER || grid.get(x, y) === GARBAGE || grid.get(x, y) === COMPOST || grid.get(x, y) === RECYCLE);
+}
+
+function reset(){
+	for (var x=0; x < grid.width; x++){
+		for (var y=0; y < grid.height; y++){
+			if (equals_to_food(x,y)){
+				grid.set(EMPTY, x,y);
+			}
+		}
 	}
 }
 function draw(){
@@ -269,10 +279,10 @@ function draw(){
 						ctx.fillStyle = "#00f";
 						console.log("blue");
 						break;
-					case FRUIT:
-						ctx.fillStyle  = "#f00";
-						console.log("red");
-						break;
+					// case FRUIT:
+					// 	ctx.fillStyle  = "#f00";
+					// 	console.log("red");
+					// 	break;
 					case PAPER:
 						ctx.fillStyle = "#ADD8E6";
 						break;
@@ -302,5 +312,5 @@ function draw(){
 }
 main();
 	</script>
-//
+
 </body>
