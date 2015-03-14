@@ -368,6 +368,7 @@ function draw(){
 		}
 	} else if (is_game_over){
 		ctx.font = "20px Times";
+		// ctx.font = "Press Start 2P";
 		ctx.fillStyle = "#000";
 		var game_over_string = "GAME OVER";
 		var repeat = ", press spacebar to try again";
