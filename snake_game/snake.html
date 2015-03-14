@@ -27,6 +27,8 @@ var current_snake;
 var EMPTY=0, SNAKE_P = 1, SNAKE_G =2, SNAKE_C = 3, SNAKE_R = 4;
 var FRUIT=2;
 
+var PAPER=10, GARBAGE=11, RECYCLE=12, COMPOST=13;
+
 var LEFT=0, UP=1, RIGHT=2, DOWN=3;
 //keycodes
 var KEY_LEFT=37, KEY_UP=38, KEY_RIGHT=39, KEY_DOWN = 40, KEY_SPACE=32;
@@ -78,24 +80,26 @@ var snake = {
 }
 
 function setFood(){
-	var empty = [];
+	var cells = [];
 	for (var x=0; x < grid.width; x++){
 		for (var y=0; y < grid.height; y++){
 			if (grid.get(x,y) === EMPTY) {
-				empty.push({x:x, y:y})
+				cells.push({x:x, y:y})
 			}
 		}
 	}
-	var random_index = Math.floor(Math.random()*empty.length);
-	var randpos = empty[random_index];
-	grid.set(FRUIT, randpos.x, randpos.y);
+	var random_index = Math.floor(Math.random()*cells.length);
+	var randpos = cells[random_index];
+	grid.set(Math.floor(Math.random()*(13 - 10 + 1)) + 10, randpos.x, randpos.y);
 
-	// random_index = Math.floor(Math.random()*empty.length);
-	// randpos = empty[random_index];
-	// grid.set(FRUIT, randpos.x, randpos.y);
+	if (eaten) {
+		random_index = Math.floor(Math.random()*cells.length);
+		randpos = cells[random_index];
+		grid.set(Math.floor(Math.random()*(13 - 10 + 1)) + 10, randpos.x, randpos.y);
+	}
 }
 // Game objects
-var canvas, ctx, keystate, frames, score, is_game_over = false;
+var canvas, ctx, keystate, frames, score, is_game_over = false, eaten = false;
 
 // functions
 function main(){
@@ -119,6 +123,7 @@ ctx.font = "13px Times";
 	init();
 	loop();
 }
+
 function init(){
 	grid.init(EMPTY, COLS, ROWS);
 
@@ -131,7 +136,7 @@ function init(){
 	if(sp.x <= 4 || sp.x >= 22 || sp.y <= 4 || sp.y >= 22) {
 		sp.x = sp.y = 10;
 	}
-				
+
 	snake.init(sp.dir, sp.x, sp.y);
 
 	current_snake = Math.ceil(Math.random() * 4);
@@ -196,17 +201,21 @@ function update(){
 				return init();
 		}
 
-		if (grid.get(nx, ny) === FRUIT){
+		// snakes eat all kinds of fruit for now
+		if (grid.get(nx, ny) === PAPER || grid.get(nx, ny) === GARBAGE || grid.get(nx, ny) === COMPOST || grid.get(nx, ny) === RECYCLE) {
 			var tail = {x:nx, y:ny};
 			score++;
+			eaten = true;
 			setFood();
 		} else {
 			var tail = snake.remove();
 			grid.set(EMPTY, tail.x, tail.y);
+			eaten = false;
 			tail.x = nx;
 			tail.y = ny;
 		}
 
+// <<<<<<< HEAD
 		switch(current_snake){
 		case SNAKE_P:
 			grid.set(SNAKE_P, tail.x, tail.y);
@@ -223,6 +232,9 @@ function update(){
 	}
 
 
+// =======
+		grid.set(SNAKE, tail.x, tail.y);
+// >>>>>>> master
 		snake.insert(tail.x, tail.y);
 	}
 }
@@ -260,6 +272,18 @@ function draw(){
 					case FRUIT:
 						ctx.fillStyle  = "#f00";
 						console.log("red");
+						break;
+					case PAPER:
+						ctx.fillStyle = "#ADD8E6";
+						break;
+					case GARBAGE:
+						ctx.fillStyle = "#FF69B4";
+						break;
+					case RECYCLE:
+						ctx.fillStyle = "#7B68EE";
+						break;
+					case COMPOST:
+						ctx.fillStyle = "#DB7093";
 						break;
 				}
 				ctx.fillRect(x*tw, y*th, tw, th);
