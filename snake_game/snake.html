@@ -99,29 +99,11 @@ function setFood(){
 			grid.set(array_fruit[n], randpos.x, randpos.y);
 		}
 		else{
-			grid.set(Math.floor(Math.random()*(13 - 10 + 1)) + 10, randpos.x, randpos.y);
+			rand_ix = Math.floor(Math.random()*3);
+			grid.set(array_fruit[rand_ix], randpos.x, randpos.y);
 		}
 	}
-	/*
-	random_index = Math.floor(Math.random()*cells.length);
-	randpos = cells[random_index];
-	switch (current_snake) {
-		case SNAKE_P:
-			grid.set(PAPER, randpos.x, randpos.y);
-			break;
-		case SNAKE_G:
-			grid.set(GARBAGE, randpos.x, randpos.y);
-			break;
-		case SNAKE_C:
-			grid.set(COMPOST, randpos.x, randpos.y);
-			break;
-		case SNAKE_R:
-			grid.set(RECYCLE, randpos.x, randpos.y);
-			break;
-	}
-	*/
 }
-// Game objects
 
 // functions
 
@@ -190,9 +172,7 @@ function init(){
 			grid.set(SNAKE_R, sp.x, sp.y);
 			break;
 	}
-
 	setFood();
-	// is_game_over = false;
 }
 
 function loop(){
@@ -340,17 +320,17 @@ function draw(){
 					// 	ctx.fillStyle  = "#f00";
 					// 	console.log("red");
 					// 	break;
-					case PAPER:
-						ctx.fillStyle = "#ADD8E6";
+					case PAPER:     	// red 
+						ctx.fillStyle = "#FF0000";
 						break;
-					case GARBAGE:
-						ctx.fillStyle = "#FF69B4";
+					case GARBAGE:       // yellow
+						ctx.fillStyle = "#FFFF00";
 						break;
-					case RECYCLE:
-						ctx.fillStyle = "#7B68EE";
+					case RECYCLE:  		// SpringGreen
+						ctx.fillStyle = "#00FF7F";
 						break;
-					case COMPOST:
-						ctx.fillStyle = "#DB7093";
+					case COMPOST: 		// Olive
+						ctx.fillStyle = "#808000";
 						break;
 				}
 				ctx.fillRect(x*tw, y*th, tw, th);
