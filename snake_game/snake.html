@@ -25,6 +25,8 @@ var COLS=26, ROWS=26;
 
 var EMPTY=0, SNAKE=1, FRUIT=2;
 
+var PAPER=10, GARBAGE=11, RECYCLE=12, COMPOST=13;
+
 var LEFT=0, UP=1, RIGHT=2, DOWN=3;
 //keycodes
 var KEY_LEFT=37, KEY_UP=38, KEY_RIGHT=39, KEY_DOWN = 40, KEY_SPACE=32;
@@ -76,17 +78,17 @@ var snake = {
 }
 
 function setFood(){
-	var empty = [];
+	var cells = [];
 	for (var x=0; x < grid.width; x++){
 		for (var y=0; y < grid.height; y++){
 			if (grid.get(x,y) === EMPTY) {
-				empty.push({x:x, y:y})
+				cells.push({x:x, y:y})
 			}
 		}
 	}
-	var random_index = Math.floor(Math.random()*empty.length);
-	var randpos = empty[random_index];
-	grid.set(FRUIT, randpos.x, randpos.y);
+	var random_index = Math.floor(Math.random()*cells.length);
+	var randpos = cells[random_index];
+	grid.set(Math.floor(Math.random()*(13 - 10 + 1)) + 10, randpos.x, randpos.y);
 
 	// random_index = Math.floor(Math.random()*empty.length);
 	// randpos = empty[random_index];
@@ -117,6 +119,7 @@ ctx.font = "13px Times";
 	init();
 	loop();
 }
+
 function init(){
 	grid.init(EMPTY, COLS, ROWS);
 
@@ -129,7 +132,7 @@ function init(){
 	if(sp.x <= 4 || sp.x >= 22 || sp.y <= 4 || sp.y >= 22) {
 		sp.x = sp.y = 10;
 	}
-				
+
 	snake.init(sp.dir, sp.x, sp.y);
 	grid.set(SNAKE, sp.x, sp.y);
 
@@ -210,6 +213,18 @@ function draw(){
 						break;
 					case FRUIT:
 						ctx.fillStyle  = "#f00";
+						break;
+					case PAPER:
+						ctx.fillStyle = "#ADD8E6";
+						break;
+					case GARBAGE:
+						ctx.fillStyle = "#FF69B4";
+						break;
+					case RECYCLE:
+						ctx.fillStyle = "#7B68EE";
+						break;
+					case COMPOST:
+						ctx.fillStyle = "#DB7093";
 						break;
 				}
 				ctx.fillRect(x*tw, y*th, tw, th);
