@@ -1,5 +1,4 @@
 // constants
-var is_game_over;
 var COLS=26, ROWS=26;
 var MIN_OFFSET = 7;
 var SCALE = 20;
@@ -10,6 +9,8 @@ var current_snake;
 var EMPTY=0, SNAKE_P = 1, SNAKE_G =2, SNAKE_C = 3, SNAKE_R = 4;
 
 var NUM_FRUIT=6;
+
+var TYPES_OF_WASTE = 4;
 
 var PAPER=10, GARBAGE=11, RECYCLE=12, COMPOST=13, array_fruit = [PAPER, GARBAGE, RECYCLE, COMPOST];
 
@@ -90,7 +91,7 @@ function setFood(){
 			grid.set(array_fruit[n], randpos.x, randpos.y);
 		}
 		else{
-			rand_ix = Math.floor(Math.random()*3);
+			rand_ix = Math.floor(Math.random()*(TYPES_OF_WASTE-1));
 			grid.set(array_fruit[rand_ix], randpos.x, randpos.y);
 		}
 	}
@@ -103,17 +104,17 @@ function setFood(){
 function choose_sprite_to_draw(fruit){
 	switch(fruit){
 		case PAPER:
-			var i = Math.floor(Math.random*paper_images.length);
-			return i;			
+			// var i = Math.floor(Math.random*paper_images.length);
+			return 0;			
 		case GARBAGE:
-			var i = Math.floor(Math.random*garbage_images.length);
-			return i;
+			// var i = Math.floor(Math.random*garbage_images.length);
+			return 0;
 		case RECYCLE:
-			var i = Math.floor(Math.random*recycle_images.length);
-			return i;
+			// var i = Math.floor(Math.random*recycle_images.length);
+			return 0;
 		case COMPOST:
-			var i = Math.floor(Math.random*compost_images.length);
-			return i;
+			// var i = Math.floor(Math.random*compost_images.length);
+			return 0;
 
 	}
 
