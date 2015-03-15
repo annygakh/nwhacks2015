@@ -1,8 +1,7 @@
 #snakeSelection{
-	width: 50%;
+	width:50%;
+	margin: auto;
 }
-
-
 
 .selection{
 	background-color: #ccc;
@@ -17,6 +16,7 @@
     border:none;
     font-smooth: never;
 	-webkit-font-smoothing : none;
+	display: block;
 }
 .selection:hover{
     border: none;
