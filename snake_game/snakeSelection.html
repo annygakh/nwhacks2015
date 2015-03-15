@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Snake game sub-page</title>
+	<<link rel="stylesheet" type="text/css" href="theme.css" />
+	<style type="text/css">
+		canvas {
+			display: block;
+			position: absolute;
+			border: 1px solid #000;
+			margin: auto;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+		}
+
+	</style>
+</head>
+<body>
+
+<!--
+<input id="startSnake" type="button" value="Let's Play Snake!" onclick="doFunction();" />
+-->
+
+<!-- <button>Reset game</button> -->
+<div class="boundary" style="width:100%">
+	<div id="snakeSelection">
+		<p id="snakeSelection_p">Select a bin to play with:</p>
+		<button class="selection" id="Recycle" onclick="main(4);">Recycling Bin</button>
+		<button class="selection" id="Garbage" onclick="main(2);">Garbage Bin</button>
+		<button class="selection" id="Compost" onclick="main(3);">Compost Bin</button>
+		<button class="selection" id="Paper" onclick="main(1);">Paper Bin</button>
+	</div>
+</div>
+	<script type="text/javascript" src="snakegame.js"></script>
+</body>
