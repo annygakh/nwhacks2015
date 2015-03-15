@@ -4,6 +4,8 @@
 	<meta charset="UTF-8">
 	<title>Snake game sub-page</title>
 	<link rel="stylesheet" type="text/css" href="theme.css" />
+	<link href='http://fonts.googleapis.com/css?family=Oldenburg' rel='stylesheet' type='text/css'>
+
 	<style type="text/css">
 		canvas {
 			display: block;
@@ -33,6 +35,43 @@
 		<button class="selection" id="Compost" onclick="main(3);">Compost Bin</button>
 		<button class="selection" id="Paper" onclick="main(1);">Paper Bin</button>
 	</div>
+</div>
+
+<div id="item"
+  style="
+  		visibility:hidden;
+  		width:300px;
+  		height:500px;
+  		bottom:215px;
+  		left:150px;
+  		border:1px solid black;
+  		position:relative;">
+	<ul>
+		<li>
+			<img src="images/compost/banana_leaf.png" 
+			style="width:30px;
+				   height:30px">
+			: Banana
+		</li>
+
+		<li>
+			<img src="images/garbage/gum.png"
+			style="width:30px; height:30px">
+			: Gum
+		</li>
+			
+		<li>
+			<img src="images/recycle/bottle.png"
+			style="width:30px; height:30px">
+		   : Bottle
+		</li>
+
+		<li>
+			<img src="images/paper/newspaper.png"
+			style="width:30px; height:30px">
+			: Newspaper
+		</li>
+	</ul>
 </div>
 	<script type="text/javascript" src="snakegame.js"></script>
 </body>

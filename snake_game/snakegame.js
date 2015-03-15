@@ -158,6 +158,8 @@ function main(snake_number){
 	hide = document.getElementById("snakeSelection");
 	hide.style.visibility = 'hidden';
 
+	show = document.getElementById("item");
+	show.style.visibility = 'visible';
 	canvas = document.createElement("canvas");
 	canvas.id = "gameBoard";
 	canvas.width = COLS*SCALE;
