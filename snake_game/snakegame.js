@@ -104,39 +104,82 @@ function setFood(){
 function choose_sprite_to_draw(fruit){
 	switch(fruit){
 		case PAPER:
-			// var i = Math.floor(Math.random*paper_images.length);
-			return 0;			
+			var i = Math.floor(Math.random()*paper_images.length);
+			return i;			
 		case GARBAGE:
-			// var i = Math.floor(Math.random*garbage_images.length);
-			return 0;
+			var i = Math.floor(Math.random()*garbage_images.length);
+			return i;
 		case RECYCLE:
-			// var i = Math.floor(Math.random*recycle_images.length);
-			return 0;
+			var i = Math.floor(Math.random()*recycle_images.length);
+			return i;
 		case COMPOST:
-			// var i = Math.floor(Math.random*compost_images.length);
-			return 0;
+			var i = Math.floor(Math.random()*compost_images.length);
+			return i;
 
 	}
 
 }
 
 function load_images(){
-	// Images
-	var banana_leaf_image = new Image();
-	banana_leaf_image.src = "images/compost/banana_leaf.png";
-	compost_images.push(banana_leaf_image);
+	// --------------COMPOST
+	var banana_image = new Image();
+	banana_image.src = "images/compost/banana.png";
+	compost_images.push(banana_image);
 
+	var apple_image = new Image();
+	apple_image.src = "images/compost/apple.png";
+	compost_images.push(apple_image);
+
+	var hamburger_image = new Image();
+	hamburger_image.src = "images/compost/hamburger.png";
+	compost_images.push(hamburger_image);
+
+	var bone_image = new Image();
+	bone_image.src = "images/compost/bone.png";
+	compost_images.push(bone_image);
+
+	var teabag_image = new Image();
+	teabag_image.src = "images/compost/tea-bag.jpg";
+	compost_images.push(teabag_image);
+
+	var watermelon_image = new Image();
+	watermelon_image.src = "images/compost/watermelon.png";
+	compost_images.push(watermelon_image);
+
+
+
+
+	// --------------GARBAGE
 	var gum_image = new Image();
 	gum_image.src = "images/garbage/gum.png";
 	garbage_images.push(gum_image);
 
+	// --------------RECYCLE
 	var bottle_image = new Image();
 	bottle_image.src = "images/recycle/bottle.png";
 	recycle_images.push(bottle_image);
 
-	var newspaper_image = new Image();
-	newspaper_image.src = "images/paper/newspaper.png";
-	paper_images.push(newspaper_image);
+	var cola_image = new Image();
+	cola_image.src = "images/recycle/cola.png";
+	recycle_images.push(cola_image);
+
+	var redcup_image = new Image();
+	redcup_image.src = "images/recycle/cup.png";
+	recycle_images.push(redcup_image);
+
+	var lightbulb_image = new Image();
+	lightbulb_image.src = "images/recycle/lightbulb.png";
+	recycle_images.push(lightbulb_image);
+
+
+
+	// --------------PAPER
+
+	var cardboard_box_image = new Image();
+	cardboard_box_image.src = "images/paper/cardboard-box.png";
+	paper_images.push(cardboard_box_image);
+
+
 
 	// Snakes
 	garbage_snake_image = new Image();
@@ -187,7 +230,6 @@ function start_game(){
 
 	});
 
-	// document.addEventListener("keypress", function(evt))
 
 	init();
 	loop();

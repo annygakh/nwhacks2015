@@ -1,4 +1,6 @@
-
+body{
+	overflow: hidden;
+}
 .boundary{
 	height: 400px;
 }
