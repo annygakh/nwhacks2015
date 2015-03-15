@@ -1,0 +1,184 @@
+
+
+
+body{
+	background:url("images/scenery/grass_background.jpg") repeat-x;
+	background-size: 600px 750px;
+	overflow: hidden;
+}
+#menu{
+	width:100%;
+	height: 700px;
+}
+
+
+form{
+	height: 260px;
+}
+
+.startButton{
+	background-color: #FFA812;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius:6px;
+    color: #fff;
+    font-family: 'Oldenburg', cursive;
+    font-size: 50px;
+    text-decoration: none;
+    cursor: pointer;
+    border: 5px solid #FFA812;
+    margin: 20px auto;
+    position: relative;
+    width: 50%;
+    top: 50%;
+    padding: 15px 15px 15px 15px;
+    /*font-smooth: never;*/
+	/*-webkit-font-smoothing : none;*/
+	display: block;
+	text-align: middle
+}
+
+.startButton:hover{
+	background-color: #fff; 
+	color: #FFA812;
+}
+
+#gameBoard{
+	display: inline;
+	position: fixed;
+	border: 1px solid #000;
+	border-radius: 15px;
+	width: 560px;
+	top: -70px;
+	bottom: 0px;
+	left: 350px;
+	right: 0px;
+}
+
+.boundary{
+	width: 100%;
+	height: 400px;
+}
+
+
+#item{
+	visibility:hidden;
+	width:300px;
+	height:500px;
+	bottom:215px;
+	border-radius: 10px;
+	left:150px;
+	border:1px solid black;
+	position: absolute;
+	left: 10px;
+	top: 40px;
+}
+
+
+#snakeSelection{
+	width: 250px;
+	height: 100%;
+	margin: auto;
+	text-align: center;
+	position: relative;
+	top: -30px;
+}
+
+#snakeSelection_p{
+	width: 200%;
+	font-size: 45px;
+	font-family: 'Oldenburg', cursive;
+	position: relative;
+	left: -110px;
+	top: 20px;
+}
+
+.buttonWrapper{
+	display: inline;
+}
+
+.selection{
+	background-color: #ccc;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    width: 300px;
+    border-radius:6px;
+    color: #fff;
+    font-family: 'Oldenburg', cursive;
+    font-size: 30px;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid #FFA812;
+    margin: 5px auto;
+    padding: 15px 15px 15px 15px;
+    position: relative;
+    /*font-smooth: never;*/
+	/*-webkit-font-smoothing : none;*/
+	display: block;
+	text-align: middle
+}
+
+.selection:hover{
+    border: none;
+    background:red;
+    box-shadow: 0px 0px 1px #777;
+}
+
+.sprite{
+	border: 3px solid #FFA812;
+	width: 30px;
+	height: 30px;
+	border-radius: 10px;
+}
+
+#Recycle{
+	background-color: #E9C2A6;
+}
+
+#Recycle:hover{
+	background-color: #fff;
+	border: none;
+	color: #E9C2A6
+}
+
+#Garbage{
+	background-color: black;
+}
+
+#Garbage:hover{
+	background-color: #fff;
+	border: none;
+	color: black;
+}
+
+#Compost{
+	background-color: #3F9E4D;
+}
+
+#Compost:hover{
+	background-color: #fff;
+	border: none;
+	color: #3F9E4D;
+}
+
+#Paper{
+	background-color: #00BFFF;
+}
+
+#Paper:hover{
+	background-color: #fff;
+	border: none;
+	color: #00BFFF;
+}
+
+.instructions{
+	top: 75px;
+	position: relative;
+}
+
+.instruction_items{
+	font-size: 12px;
+	font-family: 'Oldenburg', cursive;
+	margin-top: 10px;
+	margin-left: -10px;
+}
