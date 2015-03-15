@@ -1,8 +1,15 @@
+
+
+body{
+	background:url("images/scenery/grass_background.jpg") repeat-x;
+	background-size: 600px 850px;
+	overflow: hidden;
+}
 #menu{
 	width:100%;
 	height: 800px;
-	background: url("images/background/grass_background.jpg") repeat-x 0px 0px;
 }
+
 
 form{
 	height: 260px;
@@ -67,6 +74,14 @@ form{
 }
 
 
+#snakeSelection{
+	width: 250px;
+	height: 100%;
+	margin: auto;
+	text-align: center;
+	position: relative;
+	top: -30px;
+}
 
 #snakeSelection_p{
 	width: 200%;
@@ -74,14 +89,7 @@ form{
 	font-family: 'Oldenburg', cursive;
 	position: relative;
 	left: -110px;
-}
-
-#snakeSelection{
-	width: 250px;
-	height: 100%;
-	margin: auto;
-	text-align: center;
-	position: relative;
+	top: 20px;
 }
 
 .buttonWrapper{
@@ -117,8 +125,8 @@ form{
 
 .sprite{
 	border: 3px solid #FFA812;
-	width: 50px;
-	height: 50px;
+	width: 30px;
+	height: 30px;
 	border-radius: 10px;
 }
 
@@ -162,3 +170,14 @@ form{
 	color: #00BFFF;
 }
 
+.instructions{
+	top: 75px;
+	position: relative;
+}
+
+.instruction_items{
+	font-size: 12px;
+	font-family: 'Oldenburg', cursive;
+	margin-top: 10px;
+	margin-left: -10px;
+}

@@ -1,3 +1,5 @@
+
+
 // constants
 var COLS=26, ROWS=26;
 var MIN_OFFSET = 7;
@@ -470,10 +472,11 @@ function draw(){
 			ctx.fillText("SCORE: " + score, 10, canvas.height - 10);
 		}
 	} else if (is_game_over){
-		ctx.font = "20px Times";
+		ctx.font = "normal normal lighter 15px Courier New";
 		ctx.fillStyle = "#000";
 		var game_over_string = "GAME OVER";
 		var repeat = ", press spacebar to try again";
 		ctx.fillText(game_over_string + repeat, canvas.width / 2 - game_over_string.length*18, canvas.height /2 );
+		SPEED = 5;
 	}
 }
