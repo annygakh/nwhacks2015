@@ -128,7 +128,7 @@ function load_images(){
 }
 
 
-function main(){
+function main(snake_number){
 	hide = document.getElementById("snakeSelection");
 	hide.style.visibility = 'hidden';
 
@@ -138,6 +138,8 @@ function main(){
 	canvas.height = ROWS*20;
 	ctx = canvas.getContext("2d");
 	document.body.appendChild(canvas);
+	current_snake = snake_number;
+
 	start_game();
 
 	
@@ -176,8 +178,6 @@ function init(){
 	}
 
 	snake.init(sp.dir, sp.x, sp.y);
-
-	current_snake = Math.ceil(Math.random() * 4);
 
 	switch(current_snake){
 		case SNAKE_P:
