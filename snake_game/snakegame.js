@@ -1,25 +1,32 @@
 // constants
-var is_game_over;
 var COLS=26, ROWS=26;
 var MIN_OFFSET = 7;
+var SCALE = 20;
+
 
 var current_snake;
 
 var EMPTY=0, SNAKE_P = 1, SNAKE_G =2, SNAKE_C = 3, SNAKE_R = 4;
+
 var NUM_FRUIT=6;
+
+var TYPES_OF_WASTE = 4;
 
 var PAPER=10, GARBAGE=11, RECYCLE=12, COMPOST=13, array_fruit = [PAPER, GARBAGE, RECYCLE, COMPOST];
 
-// Sprites
-// var paper_sprites = [], garbage_sprites = [], recycle_sprites = [], compost_sprites = [];
-var paper_images = [], garbage_images = [], recycle_images = [], compost_images = [];
+var paper_images = [], garbage_images = [], recycle_images = [], compost_images = [], snake_images = [];
 
 var LEFT=0, UP=1, RIGHT=2, DOWN=3;
+
+var SPRITE_WIDTH = 31, SPRITE_HEIGHT = 28;
+
 //keycodes
 var KEY_LEFT=37, KEY_UP=38, KEY_RIGHT=39, KEY_DOWN = 40, KEY_SPACE=32, KEY_C=67, KEY_R=82, KEY_P=80, KEY_G=71;
 
 
 var canvas, ctx, keystate, frames, score, is_game_over = false, eaten = false;
+
+
 
 var grid = {
 	width: null,
@@ -84,7 +91,7 @@ function setFood(){
 			grid.set(array_fruit[n], randpos.x, randpos.y);
 		}
 		else{
-			rand_ix = Math.floor(Math.random()*3);
+			rand_ix = Math.floor(Math.random()*(TYPES_OF_WASTE-1));
 			grid.set(array_fruit[rand_ix], randpos.x, randpos.y);
 		}
 	}
@@ -97,12 +104,16 @@ function setFood(){
 function choose_sprite_to_draw(fruit){
 	switch(fruit){
 		case PAPER:
+			// var i = Math.floor(Math.random*paper_images.length);
 			return 0;			
 		case GARBAGE:
+			// var i = Math.floor(Math.random*garbage_images.length);
 			return 0;
 		case RECYCLE:
+			// var i = Math.floor(Math.random*recycle_images.length);
 			return 0;
 		case COMPOST:
+			// var i = Math.floor(Math.random*compost_images.length);
 			return 0;
 
 	}
@@ -110,6 +121,7 @@ function choose_sprite_to_draw(fruit){
 }
 
 function load_images(){
+	// Images
 	var banana_leaf_image = new Image();
 	banana_leaf_image.src = "images/compost/banana_leaf.png";
 	compost_images.push(banana_leaf_image);
@@ -125,6 +137,21 @@ function load_images(){
 	var newspaper_image = new Image();
 	newspaper_image.src = "images/paper/newspaper.png";
 	paper_images.push(newspaper_image);
+
+	// Snakes
+	garbage_snake_image = new Image();
+	garbage_snake_image.src = "images/snakes/garbage_sheet.png";
+
+	recycle_snake_image = new Image();
+	recycle_snake_image.src = "images/snakes/recycle_sheet.png";
+
+	paper_snake_image = new Image();
+	paper_snake_image.src = "images/snakes/paper_sheet.png";
+
+	compost_snake_image = new Image();
+	compost_snake_image.src = "images/snakes/compost_sheet.png";
+
+
 }
 
 
@@ -132,10 +159,12 @@ function main(snake_number){
 	hide = document.getElementById("snakeSelection");
 	hide.style.visibility = 'hidden';
 
+	show = document.getElementById("item");
+	show.style.visibility = 'visible';
 	canvas = document.createElement("canvas");
 	canvas.id = "gameBoard";
-	canvas.width = COLS*20;
-	canvas.height = ROWS*20;
+	canvas.width = COLS*SCALE;
+	canvas.height = ROWS*SCALE;
 	ctx = canvas.getContext("2d");
 	document.body.appendChild(canvas);
 	current_snake = snake_number;
@@ -157,6 +186,8 @@ function start_game(){
 		delete keystate[evt.keyCode];
 
 	});
+
+	// document.addEventListener("keypress", function(evt))
 
 	init();
 	loop();
@@ -336,22 +367,75 @@ function draw(){
 				switch(grid.get(x,y)) {
 					case EMPTY:
 						ctx.fillStyle = "#fff";
+						ctx.fillRect(x*tw, y*th, tw, th);
 						break;
 					case SNAKE_P:
 					// brown
-						ctx.fillStyle  = "#deb887";
+						switch(snake.direction){
+							case LEFT:
+								ctx.drawImage(paper_snake_image, 2*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
+								break;
+							case RIGHT:
+								ctx.drawImage(paper_snake_image, 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
+								break;
+							case UP:
+								ctx.drawImage(paper_snake_image, 3*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
+								break;
+							case DOWN:
+								ctx.drawImage(paper_snake_image, 1*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT,x*tw, y*th, tw, th);
+								break;
+						}
 						break;
 					case SNAKE_G:
 					// black
-						ctx.fillStyle = "#000";
+						switch(snake.direction){
+							case LEFT:
+								ctx.drawImage(garbage_snake_image, 2*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
+								break;
+							case RIGHT:
+								ctx.drawImage(garbage_snake_image, 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
+								break;
+							case UP:
+								ctx.drawImage(garbage_snake_image, 3*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
+								break;
+							case DOWN:
+								ctx.drawImage(garbage_snake_image, 1*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT,x*tw, y*th, tw, th);
+								break;
+						}
 						break;
 					case SNAKE_C:
 					// green
-						ctx.fillStyle = "#f0f";
+						switch(snake.direction){
+							case LEFT:
+								ctx.drawImage(compost_snake_image, 3*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
+								break;
+							case RIGHT:
+								ctx.drawImage(compost_snake_image, 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
+								break;
+							case UP:
+								ctx.drawImage(compost_snake_image, 2*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
+								break;
+							case DOWN:
+								ctx.drawImage(compost_snake_image, 1*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT,x*tw, y*th, tw, th);
+								break;
+						}
 						break;
 					case SNAKE_R:
 					// blue
-						ctx.fillStyle = "#00f";
+						switch(snake.direction){
+							case LEFT:
+								ctx.drawImage(recycle_snake_image, 2*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
+								break;
+							case RIGHT:
+								ctx.drawImage(recycle_snake_image, 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
+								break;
+							case UP:
+								ctx.drawImage(recycle_snake_image, 3*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
+								break;
+							case DOWN:
+								ctx.drawImage(recycle_snake_image, 1*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT,x*tw, y*th, tw, th);
+								break;
+						}
 						break;
 					case PAPER:
 						var index_of_sprite_to_draw = choose_sprite_to_draw(PAPER);
@@ -374,20 +458,12 @@ function draw(){
 						ctx.drawImage(image, x*tw, y*th, tw, th);
 						break;
 				}
-				if (grid.get(x,y) === SNAKE_P ||
-					grid.get(x,y) === SNAKE_C ||
-					grid.get(x,y) === SNAKE_G ||
-					grid.get(x,y) === SNAKE_R ||
-					grid.get(x,y) === EMPTY) {
-					ctx.fillRect(x*tw, y*th, tw, th);
-				}
 			}
 			ctx.fillStyle = "#000";
 			ctx.fillText("SCORE: " + score, 10, canvas.height - 10);
 		}
 	} else if (is_game_over){
 		ctx.font = "20px Times";
-		// ctx.font = "Press Start 2P";
 		ctx.fillStyle = "#000";
 		var game_over_string = "GAME OVER";
 		var repeat = ", press spacebar to try again";

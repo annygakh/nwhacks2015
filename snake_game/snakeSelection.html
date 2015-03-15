@@ -29,12 +29,49 @@
 <!-- <button>Reset game</button> -->
 <div class="boundary" style="width:100%">
 	<div id="snakeSelection">
-		<p id="snakeSelection_p">Pick a bin to play with C:< </p>
+		<p id="snakeSelection_p">Select a bin to play with:</p>
 		<button class="selection" id="Recycle" onclick="main(4);">Recycling Bin</button>
 		<button class="selection" id="Garbage" onclick="main(2);">Garbage Bin</button>
 		<button class="selection" id="Compost" onclick="main(3);">Compost Bin</button>
 		<button class="selection" id="Paper" onclick="main(1);">Paper Bin</button>
 	</div>
+</div>
+
+<div id="item"
+  style="
+  		visibility:hidden;
+  		width:300px;
+  		height:500px;
+  		bottom:215px;
+  		left:150px;
+  		border:1px solid black;
+  		position:relative;">
+	<ul>
+		<li>
+			<img src="images/compost/banana_leaf.png" 
+			style="width:30px;
+				   height:30px">
+			: Banana
+		</li>
+
+		<li>
+			<img src="images/garbage/gum.png"
+			style="width:30px; height:30px">
+			: Gum
+		</li>
+			
+		<li>
+			<img src="images/recycle/bottle.png"
+			style="width:30px; height:30px">
+		   : Bottle
+		</li>
+
+		<li>
+			<img src="images/paper/newspaper.png"
+			style="width:30px; height:30px">
+			: Newspaper
+		</li>
+	</ul>
 </div>
 	<script type="text/javascript" src="snakegame.js"></script>
 </body>
