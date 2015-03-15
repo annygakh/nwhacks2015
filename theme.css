@@ -1,13 +1,11 @@
 
-body{
-	background:url("images/scenery/grass_background.jpg");
-	background-size: 600px 750px;
-	background-position: center bottom;
-  	background-repeat: repeat-x;
- 	background-attachment: fixed;
- 	overflow: hidden;
-}
 
+
+body{
+	background:url("images/scenery/grass_background.jpg") repeat-x;
+	background-size: 600px 750px;
+	overflow: hidden;
+}
 #menu{
 	width:100%;
 	height: 700px;
@@ -66,7 +64,7 @@ form{
 #item{
 	visibility:hidden;
 	width:300px;
-	height:300px;
+	height:500px;
 	bottom:215px;
 	border-radius: 10px;
 	left:150px;
@@ -74,7 +72,6 @@ form{
 	position: absolute;
 	left: 10px;
 	top: 40px;
-	overflow-y: auto;
 }
 
 
@@ -132,8 +129,6 @@ form{
 	width: 30px;
 	height: 30px;
 	border-radius: 10px;
-	position: relative;
-	left: 25px;
 }
 
 #Recycle{
@@ -177,12 +172,8 @@ form{
 }
 
 .instructions{
-	top: -85px;
+	top: 75px;
 	position: relative;
-}
-
-.waste_items{
-	overflow-y: auto;
 }
 
 .instruction_items{
