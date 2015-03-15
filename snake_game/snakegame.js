@@ -103,13 +103,17 @@ function setFood(){
 function choose_sprite_to_draw(fruit){
 	switch(fruit){
 		case PAPER:
-			return 0;			
+			var i = Math.floor(Math.random*paper_images.length);
+			return i;			
 		case GARBAGE:
-			return 0;
+			var i = Math.floor(Math.random*garbage_images.length);
+			return i;
 		case RECYCLE:
-			return 0;
+			var i = Math.floor(Math.random*recycle_images.length);
+			return i;
 		case COMPOST:
-			return 0;
+			var i = Math.floor(Math.random*compost_images.length);
+			return i;
 
 	}
 
@@ -400,16 +404,16 @@ function draw(){
 					// green
 						switch(snake.direction){
 							case LEFT:
-								ctx.drawImage(paper_snake_image, 3*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
+								ctx.drawImage(compost_snake_image, 3*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
 								break;
 							case RIGHT:
-								ctx.drawImage(paper_snake_image, 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
+								ctx.drawImage(compost_snake_image, 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
 								break;
 							case UP:
-								ctx.drawImage(paper_snake_image, 2*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
+								ctx.drawImage(compost_snake_image, 2*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
 								break;
 							case DOWN:
-								ctx.drawImage(paper_snake_image, 1*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT,x*tw, y*th, tw, th);
+								ctx.drawImage(compost_snake_image, 1*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT,x*tw, y*th, tw, th);
 								break;
 						}
 						break;
