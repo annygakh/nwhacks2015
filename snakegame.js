@@ -2,7 +2,7 @@
 
 // constants
 var COLS=26, ROWS=26;
-var MIN_OFFSET = 7;
+var MIN_OFFSET = 10;
 var SCALE = 20;
 var SPEED = 5;
 
@@ -29,8 +29,8 @@ var garbage_items = [GARBAGE_BAG];
 var PAPER = 18;
 var paper_items = [PAPER];
 
-var hit_food;
-
+var hit_food, msg, msg_wall = "You collapsed!", do_not_draw = 1;
+var bool_hit_food = 0, bool_hit_self = 0, bool_hit_wall = 0;
 
 var BOTTLE = 19, COLA = 20, CUP = 21, LIGHTBULB = 22;		
 var recycle_items = [BOTTLE, COLA, CUP, LIGHTBULB];
@@ -319,23 +319,29 @@ function update(){
 	else if (keystate[KEY_DOWN] && snake.direction!== UP ) snake.direction = DOWN;
 	else if (keystate[KEY_RIGHT] && snake.direction!== LEFT) snake.direction = RIGHT;
 	
-	if (keystate[KEY_SPACE]) is_game_over = false;
-	
+	if (keystate[KEY_SPACE]) {
+		is_game_over = false;
+		bool_hit_wall = bool_hit_self = bool_hit_food = 0;
+	}
 	else if (keystate[KEY_R]) {
 		is_game_over = false;
 		current_snake = 4;
+		bool_hit_wall = bool_hit_self = bool_hit_food = 0;
 	}
 	else if (keystate[KEY_C]) {
 		is_game_over = false;
 		current_snake = 3;
+		bool_hit_wall = bool_hit_self = bool_hit_food = 0;
 	}
 	else if (keystate[KEY_P]) {
 		is_game_over = false;
 		current_snake = 1;
+		bool_hit_wall = bool_hit_self = bool_hit_food = 0;
 	}
 	else if (keystate[KEY_G]) {
 		is_game_over = false;
 		current_snake = 2;
+		bool_hit_wall = bool_hit_self = bool_hit_food = 0;
 	}
 
 	if(score === 5) SPEED = 4;
@@ -364,14 +370,24 @@ function update(){
 		}
 
 		if (0 > nx || nx > grid.width -  1 ||
-			0 > ny || ny > grid.height - 1 || 
-			grid.get(nx, ny) === current_snake) {
+			0 > ny || ny > grid.height - 1 /*|| 
+			grid.get(nx, ny) === current_snake*/) {
 				is_game_over = true;
+				bool_hit_wall = 1;
 				return init();
 		}
-		if (equals_to_food(nx, ny)) {
-		// console.log("before equals to food");
+
+		if (grid.get(nx, ny) === current_snake) {
 			is_game_over = true;
+			bool_hit_self = 1;
+			msg ="You hit yourself!";
+			return init();
+		}
+		
+
+		if (equals_to_food(nx, ny)) {
+			is_game_over = true;
+			hit_food = grid.get(nx, ny);
 			switch(current_snake){
 				case SNAKE_P:
 					for (var i=0; i<paper_items.length; i++){
@@ -408,6 +424,56 @@ function update(){
 					break;
 			}
 			if (is_game_over){
+				switch(hit_food) {
+					case BANANA:
+						bool_hit_food = 1;
+						msg = "Banana should be in compost!";
+						break;
+					case APPLE:
+						bool_hit_food = 1;
+						msg = "Apple should be in compost!";
+						break;
+					case BONE:
+						bool_hit_food = 1;
+						msg = "Bone should be in compost!"
+						break;
+					case HAMBURGER:
+						bool_hit_food = 1;
+						msg = "Hamburger should be in compost!";
+						break;
+					case TEA_BAG:
+						bool_hit_food = 1;
+						msg = "Tea bag should be in compost!";
+						break;
+					case WATERMELON:
+						bool_hit_food = 1;
+						msg = "Watermelon should be in compost!";
+						break;
+					case GARBAGE_BAG:
+						bool_hit_food = 1;
+						msg = "Garbage bag should be in garbage!";
+						break;
+					case PAPER:
+						bool_hit_food = 1;
+						msg = "Paper should be in paper!";
+						break;
+					case BOTTLE:
+						bool_hit_food = 1;
+						msg = "Plastic bottle should be recycled!";
+						break;
+					case COLA:
+						bool_hit_food = 1;
+						msg = "COLA cans should be recycled!";
+						break;
+					case CUP:
+						bool_hit_food = 1;
+						msg = "Plastic cup should be recycled!";
+						break;
+					case LIGHTBULB:
+						bool_hit_food = 1;
+						msg = "Lightbulb should be recycled!";
+						break;
+				}
 				return init();
 			}
 			else {
@@ -445,7 +511,7 @@ function update(){
 function equals_to_food(x,y){
 	for (var i = 0; i < all_items.length; i++){
 		if (grid.get(x,y) === all_items[i]){
-			console.log(all_items[i]);
+			//console.log(all_items[i]);
 			return true;
 			
 		}
@@ -537,7 +603,10 @@ function draw(){
 		ctx.fillStyle = "#000";
 		var game_over_string = "GAME OVER";
 		var repeat = ", press spacebar to try again";
-		ctx.fillText(game_over_string + repeat, canvas.width / 2 - game_over_string.length*18, canvas.height /2 );
+		ctx.fillText(game_over_string + repeat, canvas.width / 2 - game_over_string.length*18, canvas.height /2 );	
+		ctx.fillText(msg_wall, canvas.width / 2 - 80, canvas.height / 2 + 60);
+		if(bool_hit_food && !bool_hit_wall)
+			ctx.fillText(msg, canvas.width / 2 - 120, canvas.height / 2 + 120);
 		SPEED = 5;
 	}
 }
