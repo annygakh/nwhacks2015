@@ -1,6 +1,23 @@
+<link href='http://fonts.googleapis.com/css?family=Oldenburg' rel='stylesheet' type='text/css'>
+
+.boundary{
+	height: 600px;
+}
+
+#snakeSelection_p{
+	width: 200%;
+	font-size: 60px;
+	font-family: 'Oldenburg', cursive;
+	position: relative;
+	left: -120px;
+}
+
 #snakeSelection{
-	width:50%;
+	width:20%;
+	height: 100%;
 	margin: auto;
+	text-align: center;
+	position: relative;
 }
 
 .selection{
@@ -9,14 +26,17 @@
     -webkit-border-radius: 5px;
     border-radius:6px;
     color: #fff;
-    font-family: 'Oswald';
-    font-size: 20px;
+    font-family: 'Oldenburg', cursive;
+    font-size: 40px;
     text-decoration: none;
     cursor: pointer;
     border:none;
-    font-smooth: never;
-	-webkit-font-smoothing : none;
+    margin: 20px auto;
+    padding: 15px 15px 15px 15px;
+    /*font-smooth: never;*/
+	/*-webkit-font-smoothing : none;*/
 	display: block;
+	text-align: middle
 }
 .selection:hover{
     border: none;
