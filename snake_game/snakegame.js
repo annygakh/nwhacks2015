@@ -16,7 +16,7 @@ var paper_images = [], garbage_images = [], recycle_images = [], compost_images 
 
 var LEFT=0, UP=1, RIGHT=2, DOWN=3;
 //keycodes
-var KEY_LEFT=37, KEY_UP=38, KEY_RIGHT=39, KEY_DOWN = 40, KEY_SPACE=32;
+var KEY_LEFT=37, KEY_UP=38, KEY_RIGHT=39, KEY_DOWN = 40, KEY_SPACE=32, KEY_C=67, KEY_R=82, KEY_P=80, KEY_G=71;
 
 
 var canvas, ctx, keystate, frames, score, is_game_over = false, eaten = false;
@@ -206,10 +206,28 @@ function update(){
 	frames++;
 
 	if (keystate[KEY_LEFT] && snake.direction!== RIGHT) snake.direction = LEFT;
-	if (keystate[KEY_UP] && snake.direction!==  DOWN) snake.direction = UP;
-	if (keystate[KEY_DOWN] && snake.direction!== UP ) snake.direction = DOWN;
-	if (keystate[KEY_RIGHT] && snake.direction!== LEFT) snake.direction = RIGHT;
+	else if (keystate[KEY_UP] && snake.direction!==  DOWN) snake.direction = UP;
+	else if (keystate[KEY_DOWN] && snake.direction!== UP ) snake.direction = DOWN;
+	else if (keystate[KEY_RIGHT] && snake.direction!== LEFT) snake.direction = RIGHT;
+	
 	if (keystate[KEY_SPACE]) is_game_over = false;
+	
+	else if (keystate[KEY_R]) {
+		is_game_over = false;
+		current_snake = 4;
+	}
+	else if (keystate[KEY_C]) {
+		is_game_over = false;
+		current_snake = 3;
+	}
+	else if (keystate[KEY_P]) {
+		is_game_over = false;
+		current_snake = 1;
+	}
+	else if (keystate[KEY_G]) {
+		is_game_over = false;
+		current_snake = 2;
+	}
 
 	if (frames%5 ===0) {
 		var nx = snake.last.x;
