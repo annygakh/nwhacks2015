@@ -3,12 +3,12 @@
 
 body{
 	background:url("images/scenery/grass_background.jpg") repeat-x;
-	background-size: 600px 850px;
+	background-size: 600px 750px;
 	overflow: hidden;
 }
 #menu{
 	width:100%;
-	height: 800px;
+	height: 700px;
 }
 
 

@@ -29,6 +29,8 @@ var garbage_items = [GARBAGE_BAG];
 var PAPER = 18;
 var paper_items = [PAPER];
 
+var hit_food;
+
 
 var BOTTLE = 19, COLA = 20, CUP = 21, LIGHTBULB = 22;		
 var recycle_items = [BOTTLE, COLA, CUP, LIGHTBULB];
