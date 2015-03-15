@@ -6,13 +6,31 @@ var SCALE = 20;
 
 var current_snake;
 
+var reset_food;
+
 var EMPTY=0, SNAKE_P = 1, SNAKE_G =2, SNAKE_C = 3, SNAKE_R = 4;
 
 var NUM_FRUIT=6;
 
 var TYPES_OF_WASTE = 4;
 
-var PAPER=10, GARBAGE=11, RECYCLE=12, COMPOST=13, array_fruit = [PAPER, GARBAGE, RECYCLE, COMPOST];
+var BANANA = 10 , APPLE = 11, BONE = 12, 
+	HAMBURGER = 14, TEA_BAG = 15,
+	WATERMELON = 16;
+var compost_items = [BANANA, APPLE, BONE, 
+					HAMBURGER, TEA_BAG,
+					WATERMELON];
+var GARBAGE_BAG = 17;
+var garbage_items = [GARBAGE_BAG];
+
+var PAPER = 18;
+var paper_items = [PAPER];
+
+
+var BOTTLE = 19, COLA = 20, CUP = 21, LIGHTBULB = 22;		
+var recycle_items = [BOTTLE, COLA, CUP, LIGHTBULB];
+
+var all_items = [];
 
 var paper_images = [], garbage_images = [], recycle_images = [], compost_images = [], snake_images = [];
 
@@ -73,6 +91,20 @@ var snake = {
 	}
 }
 
+function populate_all_items_array(){
+	for (var i=0; i < compost_items.length; i++)
+		all_items.push(compost_items[i]);
+
+	for (i=0; i < garbage_items.length; i++)
+		all_items.push(garbage_items[i]);
+
+	for (i=0; i < recycle_items.length; i++)
+		all_items.push(recycle_items[i]);
+
+	for (i=0; i < paper_items.length; i++)
+		all_items.push(paper_items[i]);
+
+}
 function setFood(){
 	var cells = [];
 	for (var x=0; x < grid.width; x++){
@@ -84,65 +116,64 @@ function setFood(){
 	}
 	var random_index;
 	var randpos;
+
 	for (var n = 0; n < NUM_FRUIT; n++) {
 		random_index = Math.floor(Math.random()*cells.length);
 		randpos = cells[random_index];
-		if (n < array_fruit.length){
-			grid.set(array_fruit[n], randpos.x, randpos.y);
+		if (n < TYPES_OF_WASTE){
+			switch(n){
+				case 0:
+					var random_num = Math.floor(Math.random()*paper_items.length);
+					grid.set(paper_items[random_num], randpos.x, randpos.y);
+					break;
+				case 1:
+					var random_num = Math.floor(Math.random()*recycle_items.length);
+					grid.set(recycle_items[random_num], randpos.x, randpos.y);
+					break;
+				case 2:
+					var random_num = Math.floor(Math.random()*garbage_items.length);
+					grid.set(garbage_items[random_num], randpos.x, randpos.y);
+					break;
+				case 3:
+					var random_num = Math.floor(Math.random()*compost_items.length);
+					grid.set(compost_items[random_num], randpos.x, randpos.y);
+					break;
+			}
 		}
 		else{
-			rand_ix = Math.floor(Math.random()*(TYPES_OF_WASTE-1));
-			grid.set(array_fruit[rand_ix], randpos.x, randpos.y);
+			rand_ix = Math.floor(Math.random()*(all_items.length - 1));
+			grid.set(all_items[rand_ix], randpos.x, randpos.y);
 		}
 	}
 
-}
-// Game objects
-// Sprites
 
-
-function choose_sprite_to_draw(fruit){
-	switch(fruit){
-		case PAPER:
-			var i = Math.floor(Math.random()*paper_images.length);
-			return i;			
-		case GARBAGE:
-			var i = Math.floor(Math.random()*garbage_images.length);
-			return i;
-		case RECYCLE:
-			var i = Math.floor(Math.random()*recycle_images.length);
-			return i;
-		case COMPOST:
-			var i = Math.floor(Math.random()*compost_images.length);
-			return i;
-
-	}
+	
 
 }
 
 function load_images(){
 	// --------------COMPOST
-	var banana_image = new Image();
+	banana_image = new Image();
 	banana_image.src = "images/compost/banana.png";
 	compost_images.push(banana_image);
 
-	var apple_image = new Image();
+	apple_image = new Image();
 	apple_image.src = "images/compost/apple.png";
 	compost_images.push(apple_image);
 
-	var hamburger_image = new Image();
+	hamburger_image = new Image();
 	hamburger_image.src = "images/compost/hamburger.png";
 	compost_images.push(hamburger_image);
 
-	var bone_image = new Image();
+	bone_image = new Image();
 	bone_image.src = "images/compost/bone.png";
 	compost_images.push(bone_image);
 
-	var teabag_image = new Image();
+	teabag_image = new Image();
 	teabag_image.src = "images/compost/tea-bag.jpg";
 	compost_images.push(teabag_image);
 
-	var watermelon_image = new Image();
+	watermelon_image = new Image();
 	watermelon_image.src = "images/compost/watermelon.png";
 	compost_images.push(watermelon_image);
 
@@ -150,24 +181,24 @@ function load_images(){
 
 
 	// --------------GARBAGE
-	var gum_image = new Image();
-	gum_image.src = "images/garbage/gum.png";
-	garbage_images.push(gum_image);
+	garbage_bag_image = new Image();
+	garbage_bag_image.src = "images/garbage/garbage_bag.png";
+	garbage_images.push(garbage_bag_image);
 
 	// --------------RECYCLE
-	var bottle_image = new Image();
+	bottle_image = new Image();
 	bottle_image.src = "images/recycle/bottle.png";
 	recycle_images.push(bottle_image);
 
-	var cola_image = new Image();
+	cola_image = new Image();
 	cola_image.src = "images/recycle/cola.png";
 	recycle_images.push(cola_image);
 
-	var redcup_image = new Image();
+	redcup_image = new Image();
 	redcup_image.src = "images/recycle/cup.png";
 	recycle_images.push(redcup_image);
 
-	var lightbulb_image = new Image();
+	lightbulb_image = new Image();
 	lightbulb_image.src = "images/recycle/lightbulb.png";
 	recycle_images.push(lightbulb_image);
 
@@ -175,13 +206,13 @@ function load_images(){
 
 	// --------------PAPER
 
-	var cardboard_box_image = new Image();
-	cardboard_box_image.src = "images/paper/cardboard-box.png";
-	paper_images.push(cardboard_box_image);
+	paper_image = new Image();
+	paper_image.src = "images/paper/paper.png";
+	paper_images.push(paper_image);
 
 
 
-	// Snakes
+	// --------------- SNAKES
 	garbage_snake_image = new Image();
 	garbage_snake_image.src = "images/snakes/garbage_sheet.png";
 
@@ -211,7 +242,7 @@ function main(snake_number){
 	ctx = canvas.getContext("2d");
 	document.body.appendChild(canvas);
 	current_snake = snake_number;
-
+	populate_all_items_array();
 	start_game();
 
 	
@@ -327,39 +358,53 @@ function update(){
 				is_game_over = true;
 				return init();
 		}
-
-		// snakes eat all kinds of fruit for now
 		if (equals_to_food(nx, ny)) {
+		// console.log("before equals to food");
+			is_game_over = true;
 			switch(current_snake){
 				case SNAKE_P:
-					if (grid.get(nx,ny) !== PAPER){
-						is_game_over = true;
-						return init();
+					for (var i=0; i<paper_items.length; i++){
+						if (grid.get(nx, ny) === paper_items[i]){
+							is_game_over = false;
+							break;
+						}
 					}
 					break;
 				case SNAKE_R:
-					if (grid.get(nx,ny) !== RECYCLE){
-						is_game_over = true;
-						return init();
+					for (var i=0; i<recycle_items.length; i++){
+						if (grid.get(nx, ny) === recycle_items[i]){
+							is_game_over = false;
+							break;
+						}
 					}
 					break;
 				case SNAKE_G:
-					if (grid.get(nx,ny) !== GARBAGE){
-						is_game_over = true;
-						return init();
+					for (var i=0; i<garbage_items.length; i++){
+						if (grid.get(nx, ny) === garbage_items[i]){
+
+							is_game_over = false;
+							break;
+						}
 					}
 					break;
 				case SNAKE_C:
-					if (grid.get(nx,ny) !== COMPOST){
-						is_game_over = true;
-						return init();
+					for (var i=0; i<compost_items.length; i++){
+						if (grid.get(nx, ny) === compost_items[i]){
+							is_game_over = false;
+							break;
+						}
 					}
 					break;
 			}
-			var tail = {x:nx, y:ny};
-			score++;
-			reset();
-			setFood();
+			if (is_game_over){
+				return init();
+			}
+			else {
+				var tail = {x:nx, y:ny};
+				score++;
+				reset();
+				setFood();
+			}
 		} else {
 			var tail = snake.remove();
 			grid.set(EMPTY, tail.x, tail.y);
@@ -382,19 +427,26 @@ function update(){
 				grid.set(SNAKE_R, tail.x, tail.y);
 				break;
 	}
-
 		snake.insert(tail.x, tail.y);
 	}
 }
 
 function equals_to_food(x,y){
-	return (grid.get(x, y) === PAPER || grid.get(x, y) === GARBAGE || grid.get(x, y) === COMPOST || grid.get(x, y) === RECYCLE);
+	for (var i = 0; i < all_items.length; i++){
+		if (grid.get(x,y) === all_items[i]){
+			console.log(all_items[i]);
+			return true;
+			
+		}
+
+	}
+	return false;
 }
 
 function reset(){
 	for (var x=0; x < grid.width; x++){
 		for (var y=0; y < grid.height; y++){
-			if (equals_to_food(x,y)){
+			if (equals_to_food(x,y)) {
 				grid.set(EMPTY, x,y);
 			}
 		}
@@ -403,7 +455,8 @@ function reset(){
 function draw(){
 	var tw = canvas.width/grid.width;
 	var th = canvas.height/grid.height;
-	if (!is_game_over){
+	if (!is_game_over){					// brown
+
 		for (var x=0; x < grid.width; x++){
 			for (var y=0; y < grid.height; y++){
 				switch(grid.get(x,y)) {
@@ -412,92 +465,56 @@ function draw(){
 						ctx.fillRect(x*tw, y*th, tw, th);
 						break;
 					case SNAKE_P:
-					// brown
-						switch(snake.direction){
-							case LEFT:
-								ctx.drawImage(paper_snake_image, 2*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
-								break;
-							case RIGHT:
-								ctx.drawImage(paper_snake_image, 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
-								break;
-							case UP:
-								ctx.drawImage(paper_snake_image, 3*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
-								break;
-							case DOWN:
-								ctx.drawImage(paper_snake_image, 1*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT,x*tw, y*th, tw, th);
-								break;
-						}
+						draw_snake_p(x,y, tw, th);
 						break;
 					case SNAKE_G:
 					// black
-						switch(snake.direction){
-							case LEFT:
-								ctx.drawImage(garbage_snake_image, 2*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
-								break;
-							case RIGHT:
-								ctx.drawImage(garbage_snake_image, 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
-								break;
-							case UP:
-								ctx.drawImage(garbage_snake_image, 3*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
-								break;
-							case DOWN:
-								ctx.drawImage(garbage_snake_image, 1*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT,x*tw, y*th, tw, th);
-								break;
-						}
+						draw_snake_g(x,y, tw, th);
 						break;
 					case SNAKE_C:
 					// green
-						switch(snake.direction){
-							case LEFT:
-								ctx.drawImage(compost_snake_image, 3*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
-								break;
-							case RIGHT:
-								ctx.drawImage(compost_snake_image, 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
-								break;
-							case UP:
-								ctx.drawImage(compost_snake_image, 2*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
-								break;
-							case DOWN:
-								ctx.drawImage(compost_snake_image, 1*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT,x*tw, y*th, tw, th);
-								break;
-						}
+						draw_snake_c(x,y, tw, th);
 						break;
 					case SNAKE_R:
 					// blue
-						switch(snake.direction){
-							case LEFT:
-								ctx.drawImage(recycle_snake_image, 2*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
-								break;
-							case RIGHT:
-								ctx.drawImage(recycle_snake_image, 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
-								break;
-							case UP:
-								ctx.drawImage(recycle_snake_image, 3*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
-								break;
-							case DOWN:
-								ctx.drawImage(recycle_snake_image, 1*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT,x*tw, y*th, tw, th);
-								break;
-						}
+						draw_snake_r(x,y, tw, th);
+						break;
+					case BANANA:
+						ctx.drawImage(banana_image, x*tw, y*th, tw, th);
+						break;
+					case APPLE:
+						ctx.drawImage(apple_image, x*tw, y*th, tw, th);
+						break;
+					case HAMBURGER:
+						ctx.drawImage(hamburger_image, x*tw, y*th, tw, th);
+						break;
+					case BONE:
+						ctx.drawImage(bone_image, x*tw, y*th, tw, th);
+						break;
+					case TEA_BAG:
+						ctx.drawImage(teabag_image, x*tw, y*th, tw, th);
+						break;
+					case WATERMELON:
+						ctx.drawImage(watermelon_image, x*tw, y*th, tw, th);
+						break;
+
+					case BOTTLE:
+						ctx.drawImage(bottle_image, x*tw, y*th, tw, th);
+						break;
+					case COLA:
+						ctx.drawImage(cola_image, x*tw, y*th, tw, th);
+						break;
+					case LIGHTBULB:
+						ctx.drawImage(lightbulb_image, x*tw, y*th, tw, th);
 						break;
 					case PAPER:
-						var index_of_sprite_to_draw = choose_sprite_to_draw(PAPER);
-						var image = paper_images[index_of_sprite_to_draw];
-						ctx.drawImage(image, x*tw, y*th, tw, th);
+						ctx.drawImage(paper_image, x*tw, y*th, tw, th);
 						break;
-					case GARBAGE:
-						var index_of_sprite_to_draw = choose_sprite_to_draw(GARBAGE);
-						var image = garbage_images[index_of_sprite_to_draw];
-						ctx.drawImage(image, x*tw, y*th, tw, th);
+					case CUP:
+						ctx.drawImage(redcup_image, x*tw, y*th, tw, th);
 						break;
-					case RECYCLE:
-						var index_of_sprite_to_draw = choose_sprite_to_draw(RECYCLE);
-						var image = recycle_images[index_of_sprite_to_draw];
-						ctx.drawImage(image, x*tw, y*th, tw, th);
-						break;
-					case COMPOST:
-						var index_of_sprite_to_draw = choose_sprite_to_draw(COMPOST);
-						var image = compost_images[index_of_sprite_to_draw];
-						ctx.drawImage(image, x*tw, y*th, tw, th);
+					case GARBAGE_BAG:
+						ctx.drawImage(garbage_bag_image, x*tw, y*th, tw, th);
 						break;
 				}
 			}
@@ -512,3 +529,71 @@ function draw(){
 		ctx.fillText(game_over_string + repeat, canvas.width / 2 - game_over_string.length*18, canvas.height /2 );
 	}
 }
+
+
+function draw_snake_r(x, y, tw, th){
+	switch(snake.direction){
+		case LEFT:
+			ctx.drawImage(recycle_snake_image, 2*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
+			break;
+		case RIGHT:
+			ctx.drawImage(recycle_snake_image, 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
+			break;
+		case UP:
+			ctx.drawImage(recycle_snake_image, 3*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
+			break;
+		case DOWN:
+			ctx.drawImage(recycle_snake_image, 1*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT,x*tw, y*th, tw, th);
+			break;
+	}
+}
+function draw_snake_c(x, y, tw, th){
+	switch(snake.direction){
+		case LEFT:
+			ctx.drawImage(compost_snake_image, 3*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
+			break;
+		case RIGHT:
+			ctx.drawImage(compost_snake_image, 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
+			break;
+		case UP:
+			ctx.drawImage(compost_snake_image, 2*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
+			break;
+		case DOWN:
+			ctx.drawImage(compost_snake_image, 1*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT,x*tw, y*th, tw, th);
+			break;
+	}
+}
+
+function draw_snake_g(x, y, tw, th){
+	switch(snake.direction){
+		case LEFT:
+			ctx.drawImage(garbage_snake_image, 2*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
+			break;
+		case RIGHT:
+			ctx.drawImage(garbage_snake_image, 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
+			break;
+		case UP:
+			ctx.drawImage(garbage_snake_image, 3*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
+			break;
+		case DOWN:
+			ctx.drawImage(garbage_snake_image, 1*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT,x*tw, y*th, tw, th);
+			break;
+	}
+}
+function draw_snake_p(x, y, tw, th){
+	switch(snake.direction){
+		case LEFT:
+			ctx.drawImage(paper_snake_image, 2*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
+			break;
+		case RIGHT:
+			ctx.drawImage(paper_snake_image, 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
+			break;
+		case UP:
+			ctx.drawImage(paper_snake_image, 3*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT, x*tw, y*th, tw, th);
+			break;
+		case DOWN:
+			ctx.drawImage(paper_snake_image, 1*SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT,x*tw, y*th, tw, th);
+			break;
+	}
+}
+ 
