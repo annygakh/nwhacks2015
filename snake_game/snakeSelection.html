@@ -19,6 +19,7 @@
 		}
 
 	</style>
+
 </head>
 <body>
 
@@ -27,25 +28,24 @@
 -->
 
 <!-- <button>Reset game</button> -->
+
 <div class="boundary" style="width:100%">
-	<div id="snakeSelection">
-		<p id="snakeSelection_p">Select a bin to play with:</p>
-		<button class="selection" id="Recycle" onclick="main(4);">Recycling Bin</button>
-		<button class="selection" id="Garbage" onclick="main(2);">Garbage Bin</button>
-		<button class="selection" id="Compost" onclick="main(3);">Compost Bin</button>
-		<button class="selection" id="Paper" onclick="main(1);">Paper Bin</button>
-	</div>
+		<div id="snakeSelection">
+			<p id="snakeSelection_p">Select a bin to play with:</p>
+			<img src="images/extra_sprites/recycle.png" class = "sprite">
+			<button class="selection" id="Recycle" onclick="main(4);">Recycling Bin</button>
+			<img src="images/extra_sprites/garbage.png" class = "sprite">
+			<button class="selection" id="Garbage" onclick="main(2);">Garbage Bin</button>
+			<img src="images/extra_sprites/compost.png" class = "sprite">
+			<button class="selection" id="Compost" onclick="main(3);">Compost Bin</button>
+			<img src="images/extra_sprites/paper.png" class = "sprite">
+			<button class="selection" id="Paper" onclick="main(1);">Paper Bin</button>
+		</div>
 </div>
 
-<div id="item"
-  style="
-  		visibility:hidden;
-  		width:300px;
-  		height:500px;
-  		bottom:215px;
-  		left:150px;
-  		border:1px solid black;
-  		position:relative;">
+
+
+<div id="item">
 	<ul>
 		<li>
 			<img src="images/compost/banana_leaf.png" 
