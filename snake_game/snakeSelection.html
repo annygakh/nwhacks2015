@@ -20,70 +20,76 @@
 
 	</style>
 
-</head>
+</head> 
 <body>
+	<div class="wrapper">
 
+		<div class="boundary" style="width:100%">
+			<div id="snakeSelection">
+				<p id="snakeSelection_p">Select a bin to play with:</p>
+				<img src="images/extra_sprites/recycle.png" class = "sprite">
+				<button class="selection" id="Recycle" onclick="main(4);">Recycling Bin</button>
+				<img src="images/extra_sprites/garbage.png" class = "sprite">
+				<button class="selection" id="Garbage" onclick="main(2);">Garbage Bin</button>
+				<img src="images/extra_sprites/compost.png" class = "sprite">
+				<button class="selection" id="Compost" onclick="main(3);">Compost Bin</button>
+				<img src="images/extra_sprites/paper.png" class = "sprite">
+				<button class="selection" id="Paper" onclick="main(1);">Paper Bin</button>
+			</div>
+		</div>
+
+
+
+		<div id="item">
+			<div class="waste_items">
+				<ul>
+					<li class = "instruction_items">
+						<img src="images/compost/banana_leaf.png" 
+						style="width:30px;
+						height:30px">
+						: Banana
+					</li>
+
+					<li class = "instruction_items">
+						<img src="images/garbage/gum.png"
+						style="width:30px; height:30px">
+						: Gum
+					</li>
+
+					<li class = "instruction_items">
+						<img src="images/recycle/bottle.png"
+						style="width:30px; height:30px">
+						: Bottle
+					</li>
+
+					<li class = "instruction_items">
+						<img src="images/paper/newspaper.png"
+						style="width:30px; height:30px">
+						: Newspaper
+					</li>
+				</ul>
+			</div>
+
+			<div class ="instructions">
+				<p class="instruction_items" style ="margin-left: 15px;"> Instructions:</p>
+				<ul>
+					<li class ="instruction_items"> Use arrow keys to control the direction </li>
+					<li class ="instruction_items"> Press 'R' to become a Recycle Bin </li>
+					<li class ="instruction_items"> Press 'C' to become a Compost Bin </li>
+					<li class ="instruction_items"> Press 'G' to become a Garbage Bin </li>
+					<li class ="instruction_items"> Press 'P' to become a Paper Bin </li>
+				</ul>
+			</div>
+			<div class="push"></div>
+		</div>
+		<div class="footer">
+			<img src="images/scenery/grass_background.jpg" style="width: 100%; height: 350px;">
+		</div>
+</body>
 <!--
 <input id="startSnake" type="button" value="Let's Play Snake!" onclick="doFunction();" />
 -->
 
 <!-- <button>Reset game</button> -->
 
-<div class="boundary" style="width:100%">
-		<div id="snakeSelection">
-			<p id="snakeSelection_p">Select a bin to play with:</p>
-			<img src="images/extra_sprites/recycle.png" class = "sprite">
-			<button class="selection" id="Recycle" onclick="main(4);">Recycling Bin</button>
-			<img src="images/extra_sprites/garbage.png" class = "sprite">
-			<button class="selection" id="Garbage" onclick="main(2);">Garbage Bin</button>
-			<img src="images/extra_sprites/compost.png" class = "sprite">
-			<button class="selection" id="Compost" onclick="main(3);">Compost Bin</button>
-			<img src="images/extra_sprites/paper.png" class = "sprite">
-			<button class="selection" id="Paper" onclick="main(1);">Paper Bin</button>
-		</div>
-</div>
-
-
-
-<div id="item">
-	<ul>
-		<li class = "instruction_items">
-			<img src="images/compost/banana_leaf.png" 
-			style="width:30px;
-				   height:30px">
-			: Banana
-		</li>
-
-		<li class = "instruction_items">
-			<img src="images/garbage/gum.png"
-			style="width:30px; height:30px">
-			: Gum
-		</li>
-			
-		<li class = "instruction_items">
-			<img src="images/recycle/bottle.png"
-			style="width:30px; height:30px">
-		   : Bottle
-		</li>
-
-		<li class = "instruction_items">
-			<img src="images/paper/newspaper.png"
-			style="width:30px; height:30px">
-			: Newspaper
-		</li>
-	</ul>
-
-	<div class ="instructions">
-		<p class="instruction_items" style ="margin-left: 15px;"> Instructions:</p>
-		<ul>
-			<li class ="instruction_items"> Use arrow keys to control the direction </li>
-			<li class ="instruction_items"> Press 'R' to become a Recycle Bin </li>
-			<li class ="instruction_items"> Press 'C' to become a Compost Bin </li>
-			<li class ="instruction_items"> Press 'G' to become a Garbage Bin </li>
-			<li class ="instruction_items"> Press 'P' to become a Paper Bin </li>
-		</ul>
-	</div>
-
-</div>
 	<script type="text/javascript" src="snakegame.js"></script>
-</body>
