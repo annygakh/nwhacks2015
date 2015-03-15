@@ -2,6 +2,7 @@
 var is_game_over;
 var COLS=26, ROWS=26;
 var MIN_OFFSET = 7;
+var SPEED = 5;
 
 var current_snake;
 
@@ -210,7 +211,12 @@ function update(){
 	if (keystate[KEY_RIGHT] && snake.direction!== LEFT) snake.direction = RIGHT;
 	if (keystate[KEY_SPACE]) is_game_over = false;
 
-	if (frames%5 ===0) {
+	if (score === 10) SPEED = 4;
+	if (score === 15) SPEED = 3;
+	if (score === 20) SPEED = 2;
+	if (score === 30) SPEED = 1;
+
+	if (frames%SPEED ===0) {
 		var nx = snake.last.x;
 		var ny = snake.last.y;
 
@@ -373,5 +379,6 @@ function draw(){
 		var game_over_string = "GAME OVER";
 		var repeat = ", press spacebar to try again";
 		ctx.fillText(game_over_string + repeat, canvas.width / 2 - game_over_string.length*18, canvas.height /2 );
+		SPEED = 5;
 	}
 }
