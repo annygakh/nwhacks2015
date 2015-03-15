@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 
 
 body{
@@ -6,6 +7,17 @@ body{
 	background-size: 600px 750px;
 	overflow: hidden;
 }
+=======
+body{
+	background:url("images/scenery/grass_background.jpg");
+	background-size: 600px 750px;
+	background-position: center bottom;
+  	background-repeat: repeat-x;
+ 	background-attachment: fixed;
+ 	overflow: hidden;
+}
+
+>>>>>>> 8d6353aa05d7ebd3c2d78c4f2ddaba42be912bea
 #menu{
 	width:100%;
 	height: 700px;
@@ -64,7 +76,11 @@ form{
 #item{
 	visibility:hidden;
 	width:300px;
+<<<<<<< HEAD
 	height:500px;
+=======
+	height:300px;
+>>>>>>> 8d6353aa05d7ebd3c2d78c4f2ddaba42be912bea
 	bottom:215px;
 	border-radius: 10px;
 	left:150px;
@@ -72,6 +88,10 @@ form{
 	position: absolute;
 	left: 10px;
 	top: 40px;
+<<<<<<< HEAD
+=======
+	overflow-y: auto;
+>>>>>>> 8d6353aa05d7ebd3c2d78c4f2ddaba42be912bea
 }
 
 
@@ -129,6 +149,11 @@ form{
 	width: 30px;
 	height: 30px;
 	border-radius: 10px;
+<<<<<<< HEAD
+=======
+	position: relative;
+	left: 25px;
+>>>>>>> 8d6353aa05d7ebd3c2d78c4f2ddaba42be912bea
 }
 
 #Recycle{
@@ -172,10 +197,21 @@ form{
 }
 
 .instructions{
+<<<<<<< HEAD
 	top: 75px;
 	position: relative;
 }
 
+=======
+	top: -85px;
+	position: relative;
+}
+
+.waste_items{
+	overflow-y: auto;
+}
+
+>>>>>>> 8d6353aa05d7ebd3c2d78c4f2ddaba42be912bea
 .instruction_items{
 	font-size: 12px;
 	font-family: 'Oldenburg', cursive;
